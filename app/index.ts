@@ -1,9 +1,10 @@
 import { HTTP } from './services/http.js';
 
-const renderUser = async () => {
-  const http = new HTTP();
+const renderUser = async (config: any) => {
+  const { api: apiConfig } = config;
+  const http = new HTTP(apiConfig);
 
-  const user = await http.get('/api/users') as unknown as any[];
+  const user = (await http.get(apiConfig.resources.users)) as unknown as any[];
 
   const listNode = document.getElementById('user-list');
 
@@ -15,4 +16,11 @@ const renderUser = async () => {
   });
 };
 
-renderUser();
+const app = () => {
+  const config = (window as any).__CONFIG__;
+  delete (window as any).__CONFIG__;
+
+  renderUser(config);
+}
+
+app();

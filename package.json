@@ -7,7 +7,7 @@
     "clean": "rm -rf ./dist && mkdir dist",
     "build:server": "tsc --build tsconfig.es5.json",
     "build:client": "tsc --build tsconfig.es6.json --watch",
-    "build": "yarn clean && cp ./index.html ./dist/index.html && yarn build:server && yarn build:client",
+    "build": "yarn clean && yarn build:server && yarn build:client",
     "run:server": "nodemon --watch dist ./dist/server.js",
     "start": "concurrently \"yarn build\" \"yarn run:server\""
   },

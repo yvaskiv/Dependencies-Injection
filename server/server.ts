@@ -1,23 +1,34 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
+import fs from 'fs';
 
-const PORT = process.env.PORT || 8080;
+import { getConfig } from './getConfig';
+import { getUsers } from './getUsers';
+
+const config = getConfig() || {} as any;
+const PORT = process.env.PORT || config.server?.port;
 
 const app = express();
 
 app.use(express.static('dist'));
 
 app.get('/api/users', (req: Request, res: Response) => {
-  const users = [
-    { id: 1, name: 'John Doe'},
-    { id: 2, name: 'Jane Doe'},
-    { id: 3, name: 'Richard Roe'}
-  ];
+  const users = getUsers();
+
   res.json(users);
 });
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join( __dirname, './index.html' ) );
+  fs.readFile(path.join(process.cwd(), 'index.html'), 'utf8', (error, data) => {
+    if (error) {
+      console.log('Reading html file', error);
+    }
+
+    const clientConfigStr = JSON.stringify(config.common);
+    const document = data.replace(/window.__CONFIG__/, `window.__CONFIG__ = ${clientConfigStr}`);
+
+    res.send(document);
+  });
 });
 
 app.listen(PORT, () => console.log('App is running on port:', PORT));
