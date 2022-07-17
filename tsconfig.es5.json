@@ -5,7 +5,7 @@
     "target": "es6",
     "lib": ["es2020"],
     "rootDir": "server",
-    "outDir": "./dist",
+    "outDir": "./dist/server",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,

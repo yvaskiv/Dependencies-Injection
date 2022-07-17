@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf ./dist && mkdir dist",
     "build:server": "tsc --build tsconfig.es5.json",
-    "build:client": "tsc-watch --build tsconfig.es6.json --onSuccess \"node dist/server.js\"",
+    "build:client": "tsc-watch --build tsconfig.es6.json --onSuccess \"node dist/server/index.js\"",
     "start": "yarn clean && yarn build:server && yarn build:client"
   },
   "keywords": [],

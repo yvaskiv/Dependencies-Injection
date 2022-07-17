@@ -10,7 +10,7 @@ const PORT = process.env.PORT || config.server?.port;
 
 const app = express();
 
-app.use(express.static('dist'));
+app.use(express.static('dist/client'));
 
 app.get('/api/users', (req: Request, res: Response) => {
   const users = getUsers();
