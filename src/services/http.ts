@@ -1,4 +1,4 @@
-import { Logger } from './logger.js';
+import { Logger } from './logger';
 
 export class HTTP {
   logger: any;
@@ -14,11 +14,11 @@ export class HTTP {
 
     if (response.ok) {
       const responseData = await response.json();
-      this.logger.info(`Status: ${response.status}. Users: ${JSON.stringify(responseData)}`);
+      this.logger.info(`Status: ${response.status}. Response: ${JSON.stringify(responseData)}`);
 
       return responseData;
     } else {
-      this.logger.error(`Status: ${response.status}. Users: ${response.statusText}`);
+      this.logger.error(`Status: ${response.status}. Status Text: ${response.statusText}`);
     }
   }
 }

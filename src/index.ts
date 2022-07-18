@@ -1,14 +1,13 @@
-import { HTTP } from './services/http.js';
+import { Users } from './services/users';
+import { Logger } from './services/logger';
 
-const renderUser = async (config: any) => {
-  const { api: apiConfig } = config;
-  const http = new HTTP(apiConfig);
+const renderUsers = async (config: any) => {
+  const usersService = new Users(config);
+  const users = await usersService.getUsers();
 
-  const user = (await http.get(apiConfig.resources.users)) as unknown as any[];
+  const listNode = document.getElementById('users-list');
 
-  const listNode = document.getElementById('user-list');
-
-  user.forEach((user) => {
+  users.forEach((user: any) => {
     const listItemNode = document.createElement('li');
 
     listItemNode.innerHTML = user.name;
@@ -20,7 +19,13 @@ const app = () => {
   const config = (window as any).__CONFIG__;
   delete (window as any).__CONFIG__;
 
-  renderUser(config);
-}
+  renderUsers(config.api);
+};
 
-app();
+window.onload = (event: Event) => {
+  const logger = new Logger();
+
+  logger.info('Page is loaded.');
+
+  app();
+};
