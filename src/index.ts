@@ -1,13 +1,15 @@
 import { Users } from './services/users';
 import { Logger } from './services/logger';
 
-const renderUsers = async (config: any) => {
+import type { User, ApiConfig } from './types';
+
+const renderUsers = async (config: ApiConfig) => {
   const usersService = new Users(config);
   const users = await usersService.getUsers();
 
   const listNode = document.getElementById('users-list');
 
-  users.forEach((user: any) => {
+  users.forEach((user: User) => {
     const listItemNode = document.createElement('li');
 
     listItemNode.innerHTML = user.name;

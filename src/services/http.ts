@@ -1,10 +1,11 @@
 import { Logger } from './logger';
 
+import type { ApiConfig } from '../types';
 export class HTTP {
-  logger: any;
-  apiConfig: any;
+  logger: Logger;
+  apiConfig: ApiConfig;
 
-  constructor(apiConfig: any) {
+  constructor(apiConfig: ApiConfig) {
     this.apiConfig = apiConfig;
     this.logger = new Logger();
   }

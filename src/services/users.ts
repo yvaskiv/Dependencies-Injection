@@ -1,15 +1,16 @@
 import { HTTP } from './http';
 
+import type { ApiConfig, User } from '../types';
 export class Users {
-  http: any;
-  apiConfig: any;
+  http: HTTP;
+  apiConfig: ApiConfig;
 
-  constructor(apiConfig: any) {
+  constructor(apiConfig: ApiConfig) {
     this.http = new HTTP(apiConfig);
     this.apiConfig = apiConfig;
   }
 
   getUsers() {
-    return this.http.get(this.apiConfig.resources.users) as unknown as any[];
+    return this.http.get(this.apiConfig.resources.users) as unknown as User[];
   }
 }
