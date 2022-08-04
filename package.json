@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir dist",
-    "build:server": "tsc --build tsconfig.es5.json",
     "build:client": "webpack",
-    "build": "yarn clean && yarn build:server && yarn build:client",
-    "start": "concurrently \"yarn build\" \"nodemon --watch dist dist/server/index.js\""
+    "build:server": "tsc --build tsconfig.es5.json",
+    "dev:server": "yarn clean && yarn build:server && nodemon --watch dist dist/server/index.js",
+    "start": "concurrently \"yarn build:client\" \"yarn dev:server\""
   },
   "keywords": [],
   "author": "",
