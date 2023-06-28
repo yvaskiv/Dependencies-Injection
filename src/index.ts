@@ -2,9 +2,7 @@ import { HTTP } from './services/http';
 import { Logger } from './services/logger';
 import { Users } from './services/users';
 import type { User, ApiConfig } from './types';
-import IoCContainer from 'ioc-lite';
-
-const ioc = new IoCContainer();
+import { ioc } from './ioc';
 
 const renderUsers = async (config: ApiConfig) => {
   ioc.register('config', config);
