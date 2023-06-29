@@ -12,5 +12,13 @@ type IoCResources = {
   users: typeof Users
 }
 
+export const createIoCContainer = () =>  {
+  const ioc = new IoCContainer<IoCResources>();
+  
+  ioc.registerClass('logger', Logger);
+  ioc.registerClass('http', HTTP);
+  ioc.registerClass('users', Users);
 
-export const ioc = new IoCContainer<IoCResources>();
+  return ioc;
+};
+
